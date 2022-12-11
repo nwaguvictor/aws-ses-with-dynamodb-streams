@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "sam-app"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-zuyp0ewl6nul"
+s3_prefix = "sam-app"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "DynamoDBTableStreamARN=\"arn:aws:dynamodb:us-east-1:050646241131:table/customers-email/stream/2022-12-11T15:06:32.903\" MailFromIdentityName=\"nwaguvictor100@gmail.com\" MailToIdentityName=\"leofizzy3@gmail.com\""
+image_repositories = []

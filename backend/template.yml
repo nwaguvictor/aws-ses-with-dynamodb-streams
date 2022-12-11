@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+
+Parameters:
+  DynamoDBTableStreamARN:
+    Type: String
+  MailFromIdentityName: 
+    Type: String
+  MailToIdentityName:
+    Type: String
+
+
+Resources:
+  SendEmailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: handler.sendMail
+      Runtime: nodejs14.x
+      CodeUri: ./
+      Environment:
+        Variables:
+          FROM_EMAIL_ADDRESS: !Ref MailFromIdentityName
+          TO_EMAIL_ADDRESS: !Ref MailToIdentityName
+      Policies:
+        - SESCrudPolicy:
+            IdentityName: !Ref MailFromIdentityName
+        - SESCrudPolicy:
+            IdentityName: !Ref MailToIdentityName
+      Events: 
+        Stream:
+          Type: DynamoDB
+          Properties:
+            Stream: !Ref DynamoDBTableStreamARN
+            BatchSize: 1
+            StartingPosition: LATEST

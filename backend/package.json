@@ -1,0 +1,12 @@
+{
+  "name": "aws-ses-01",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1272.0"
+  },
+  "scripts": {
+    "deploy:guided": "sam build && sam deploy --guided"
+  }
+}
